@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scroll Trigger</title>
+  <style>
+    body {
+      height: 2000px; /* for scrolling */
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    #targetBox {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      margin: 1000px auto; /* place element down for scroll */
+    }
+  </style>
+</head>
+<body>
+
+  <div id="targetBox"></div>
+
+  <script>
+    // ✅ Your custom function
+    function myCustomFunction() {
+      alert("You reached the red box!");
+      console.log("Custom function called!");
+    }
+
+    // ✅ Trigger function on scroll
+    window.addEventListener("scroll", function () {
+      const box = document.getElementById("targetBox");
+      const boxTop = box.getBoundingClientRect().top;//it gives the 
+      const windowHeight = window.innerHeight;
+
+      // If box is visible
+      if (boxTop < windowHeight-100) {
+        myCustomFunction();
+        
+        // ❗Only call once: remove scroll listener after call
+        window.removeEventListener("scroll", arguments.callee);
+      }
+              
+
+    });
+  </script>
+
+</body>
+</html>
